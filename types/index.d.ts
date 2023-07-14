@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-interface CustomMatchers<R> extends Record<string, any> {
+export interface CustomMatchers<R> extends Record<string, any> {
   /**
    * Note: Currently unimplemented
    * Passing assertion
@@ -146,7 +146,10 @@ interface CustomMatchers<R> extends Record<string, any> {
    * @param {Mock} mock
    * @param {boolean} [failIfNoSecondInvocation=true]
    */
-  toHaveBeenCalledBefore(mock: jest.MockInstance<any, any[]>, failIfNoSecondInvocation: boolean): R;
+  toHaveBeenCalledBefore(
+    mock: jest.MockInstance<any, any[]> | import('vitest').MockInstance<any, any[]>,
+    failIfNoSecondInvocation: boolean,
+  ): R;
 
   /**
    * Use `.toHaveBeenCalledAfter` when checking if a `Mock` was called after another `Mock`.
@@ -156,7 +159,10 @@ interface CustomMatchers<R> extends Record<string, any> {
    * @param {Mock} mock
    * @param {boolean} [failIfNoFirstInvocation=true]
    */
-  toHaveBeenCalledAfter(mock: jest.MockInstance<any, any[]>, failIfNoFirstInvocation: boolean): R;
+  toHaveBeenCalledAfter(
+    mock: jest.MockInstance<any, any[]> | import('vitest').MockInstance<any, any[]>,
+    failIfNoFirstInvocation: boolean,
+  ): R;
 
   /**
    * Use `.toHaveBeenCalledOnce` to check if a `Mock` was called exactly one time.
@@ -580,7 +586,10 @@ declare namespace jest {
      * @param {Mock} mock
      * @param {boolean} [failIfNoSecondInvocation=true]
      */
-    toHaveBeenCalledBefore(mock: jest.MockInstance<any, any[]>, failIfNoSecondInvocation?: boolean): R;
+    toHaveBeenCalledBefore(
+      mock: jest.MockInstance<any, any[]> | import('vitest').MockInstance<any, any[]>,
+      failIfNoSecondInvocation?: boolean,
+    ): R;
 
     /**
      * Use `.toHaveBeenCalledAfter` when checking if a `Mock` was called after another `Mock`.
@@ -590,7 +599,10 @@ declare namespace jest {
      * @param {Mock} mock
      * @param {boolean} [failIfNoFirstInvocation=true]
      */
-    toHaveBeenCalledAfter(mock: jest.MockInstance<any, any[]>, failIfNoFirstInvocation?: boolean): R;
+    toHaveBeenCalledAfter(
+      mock: jest.MockInstance<any, any[]> | import('vitest').MockInstance<any, any[]>,
+      failIfNoFirstInvocation?: boolean,
+    ): R;
 
     /**
      * Use `.toHaveBeenCalledOnce` to check if a `Mock` was called exactly one time.
@@ -887,7 +899,10 @@ declare namespace Vi {
 }
 
 // Changed since vitest 0.31.0. Usefull for every vitest version after 0.31.0
+import 'vitest';
 declare module 'vitest' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface Assertion<T = any> extends CustomMatchers<T> {}
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface AsymmetricMatchersContaining extends CustomMatchers<any> {}
 }
