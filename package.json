@@ -1,5 +1,5 @@
 {
-  "name": "jest-extended",
+  "name": "@lukaselmer/jest-extended",
   "version": "4.0.0",
   "description": "Additional Jest matchers",
   "main": "dist/index.js",
@@ -33,7 +33,7 @@
   ],
   "author": "Matt Phillips <matt@mattphillips.io> (mattphillips.io)",
   "license": "MIT",
-  "repository": "jest-community/jest-extended",
+  "repository": "lukaselmer/jest-extended",
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
